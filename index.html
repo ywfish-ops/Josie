@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<!--
+============================================================
+  物理AI(人形机器人)产业链研究面板 · 共享版
+============================================================
+  更新: 2026/05/30
+  视角: A股/港股通为主,兼顾美股/日股全貌
+
+  温度计: 🟡 观察期 — 商业化2027-2030,需精选
+  关键前提: 2026/01特斯拉转产Optimus Gen3,目标年产100万台
+
+  三大瓶颈(卖铲子框架):
+    1 稀土磁材NdFeB(中国控69%开采+90%加工)
+    2 精密传动(滚柱丝杠>谐波减速器,占执行器30-50%)
+    3 灵巧手(占BOM 31%)
+
+  A股可买瓶颈龙头: 绿的谐波/汇川/拓普/双环/兆威/金力永磁等
+  美股: MP/USAR(稀土) | 日股: Harmonic Drive
+
+  结论: 整机商业化远需观察;稀土磁材资金效率最高;
+        A股传动板块2025已炒过一波,注意位置
+============================================================
+-->
+<html lang="zh" data-theme="dark" style="color-scheme:dark;background:#0c0a08;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>物理AI 产业链研究</title>
+<meta name="color-scheme" content="dark only">
+<meta name="supported-color-schemes" content="dark">
+<meta name="theme-color" content="#0c0a08">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="物理AI研究">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Crect width='180' height='180' rx='40' fill='%230c0a08'/%3E%3Crect x='62' y='44' width='56' height='52' rx='10' fill='%23ffb838'/%3E%3Ccircle cx='80' cy='66' r='7' fill='%230c0a08'/%3E%3Ccircle cx='100' cy='66' r='7' fill='%230c0a08'/%3E%3Crect x='78' y='100' width='24' height='40' rx='6' fill='%23ffb838'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Space+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  html { color-scheme:dark only; background:#0c0a08; forced-color-adjust:none; -webkit-text-size-adjust:100%; }
+  html, body, * { forced-color-adjust:none; }
+  :root {
+    --bg:#0c0a08; --panel:#16130f; --panel-2:#1c1812; --line:#332b1f;
+    --amber:#ffb838; --amber-dim:#b87d1a; --green:#2ee6a0; --red:#ff4d5e; --blue:#5b9dff;
+    --ink:#f0ebe2; --ink-dim:#94897a; --ink-faint:#5a5246;
+    --mono:'Space Mono',monospace; --display:'Archivo','Noto Sans SC',sans-serif;
+    --body:'Noto Sans SC','Archivo',sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#0c0a08; background:var(--bg); color:var(--ink); font-family:var(--body); line-height:1.5;
+    background-image: radial-gradient(circle at 15% 8%, rgba(255,184,56,0.05), transparent 40%), radial-gradient(circle at 85% 92%, rgba(91,157,255,0.03), transparent 45%);
+    min-height:100vh; overflow-x:hidden;
+  }
+  body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:1; background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.01) 0,rgba(255,255,255,0.01) 1px,transparent 1px,transparent 3px); opacity:.5; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 20px; position:relative; z-index:2; }
+
+  header { padding:44px 0 0; }
+  @supports (padding: env(safe-area-inset-top)) {
+    header { padding-top: calc(4px + env(safe-area-inset-top)); }
+    body { padding-bottom: env(safe-area-inset-bottom); }
+  }
+  .kicker { font-family:var(--mono); font-size:11px; letter-spacing:.35em; color:var(--amber); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:10px; }
+  .kicker .dot { width:8px; height:8px; border-radius:50%; background:var(--amber); box-shadow:0 0 10px var(--amber); animation:pulse 2.4s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+  h1 { font-family:var(--display); font-weight:900; font-size:clamp(2.2rem,6vw,4rem); line-height:.95; letter-spacing:-.03em; text-transform:uppercase; }
+  h1 .hl { color:var(--amber); }
+  .sub { margin-top:14px; max-width:680px; color:var(--ink-dim); font-size:14px; }
+  .sub b { color:var(--ink); }
+  .updated { margin-top:14px; font-family:var(--mono); font-size:12px; color:var(--ink-faint); }
+  .xlink { margin-top:10px; font-family:var(--mono); font-size:11px; color:var(--ink-faint); }
+  .xlink b { color:var(--amber-dim); }
+
+  .tabs { display:flex; gap:2px; margin:26px 0 0; border-bottom:1px solid var(--line); }
+  .tab { flex:1 1 0; min-width:0; font-family:var(--display); font-weight:800; font-size:.82rem; text-transform:uppercase; color:var(--ink-faint); background:none; border:none; padding:13px 4px; cursor:pointer; border-bottom:2px solid transparent; transition:.2s; white-space:nowrap; text-align:center; }
+  .tab.active { color:var(--amber); border-bottom-color:var(--amber); }
+  .panel-view { display:none; padding:30px 0 0; animation:fade .4s; }
+  .panel-view.active { display:block; }
+  @keyframes fade { from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+
+  /* verdict */
+  .verdict { background:var(--panel); border:1px solid var(--line); border-radius:4px; display:grid; grid-template-columns:auto 1fr; overflow:hidden; margin-bottom:28px; }
+  .gauge-cell { padding:30px 30px; border-right:1px solid var(--line); display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(160deg,rgba(255,184,56,0.06),transparent); min-width:220px; }
+  .thermometer { width:54px; height:180px; position:relative; margin:8px 0 18px; }
+  .thermo-tube { position:absolute; left:50%; top:0; transform:translateX(-50%); width:20px; height:148px; background:var(--panel-2); border:2px solid var(--line); border-radius:12px 12px 0 0; overflow:hidden; }
+  .thermo-fill { position:absolute; bottom:0; left:0; width:100%; background:linear-gradient(0deg,var(--amber-dim),var(--amber)); height:0; transition:height 1.8s cubic-bezier(.2,.8,.2,1); }
+  .thermo-bulb { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:44px; height:44px; border-radius:50%; background:linear-gradient(160deg,var(--amber),var(--amber-dim)); border:2px solid var(--line); box-shadow:0 0 24px rgba(255,184,56,.45); }
+  .verdict-status { font-family:var(--display); font-weight:900; font-size:1.6rem; text-transform:uppercase; color:var(--amber); text-align:center; }
+  .verdict-status small { display:block; font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--ink-dim); font-weight:400; margin-top:6px; }
+  .verdict-body { padding:28px 30px; display:flex; flex-direction:column; justify-content:center; }
+  .verdict-body h2 { font-family:var(--display); font-size:1.05rem; font-weight:800; text-transform:uppercase; margin-bottom:14px; }
+  .verdict-body p { color:var(--ink-dim); font-size:14px; margin-bottom:10px; }
+  .verdict-body p b { color:var(--amber); }
+  .scale { margin-top:14px; display:flex; border-radius:3px; overflow:hidden; border:1px solid var(--line); }
+  .scale div { flex:1; padding:8px 6px; text-align:center; font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:var(--ink-faint); text-transform:uppercase; }
+  .scale .s-on { background:rgba(255,184,56,.15); color:var(--amber); border-bottom:2px solid var(--amber); font-weight:700; }
+
+  .premise { background:var(--panel-2); border:1px dashed var(--line); border-radius:4px; padding:18px 22px; margin-bottom:28px; }
+  .premise h4 { font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--amber-dim); text-transform:uppercase; margin-bottom:10px; }
+  .premise p { font-size:13.5px; color:var(--ink-dim); }
+  .premise p b { color:var(--ink); }
+
+  .layer { margin:34px 0; }
+  .layer-head { display:flex; align-items:baseline; gap:14px; margin-bottom:4px; }
+  .layer-num { font-family:var(--mono); font-size:13px; color:var(--bg); background:var(--red); padding:2px 10px; border-radius:2px; font-weight:700; }
+  .layer-head.b2 .layer-num{background:var(--amber);} .layer-head.b3 .layer-num{background:var(--amber-dim);}
+  .layer-title { font-family:var(--display); font-size:1.4rem; font-weight:800; text-transform:uppercase; }
+  .layer-tag { margin-left:auto; font-family:var(--mono); font-size:10px; color:var(--red); border:1px solid var(--line); padding:3px 9px; border-radius:2px; }
+  .layer-desc { color:var(--ink-faint); font-size:12px; margin:6px 0 18px; font-family:var(--mono); }
+
+  .grid { display:grid; gap:13px; }
+  .grid-3 { grid-template-columns:repeat(3,1fr); }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:18px; position:relative; overflow:hidden; transition:.25s; }
+  .card:hover { transform:translateY(-3px); border-color:var(--amber-dim); }
+  .card::after { content:""; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--ink-faint); }
+  .card.investable::after { background:var(--green); }
+  .card.partial::after { background:var(--amber); }
+  .card.noaccess::after { background:var(--red); }
+  .card.oversea::after { background:var(--blue); }
+  .card.unlisted::after { background:var(--ink-faint); }
+  .card-ticker { font-family:var(--mono); font-size:12px; color:var(--ink-dim); letter-spacing:.1em; display:flex; justify-content:space-between; align-items:center; }
+  .card-name { font-size:12px; color:var(--ink-faint); margin-top:2px; min-height:16px; }
+  .card-val { font-family:var(--display); font-weight:900; font-size:1.5rem; margin:10px 0 2px; letter-spacing:-.02em; }
+  .card-tag { font-family:var(--mono); font-size:10px; font-weight:700; padding:2px 7px; border-radius:2px; display:inline-block; margin-top:4px; }
+  .tag-inv { background:rgba(46,230,160,.15); color:var(--green); }
+  .tag-par { background:rgba(255,184,56,.12); color:var(--amber); }
+  .tag-no { background:rgba(255,77,94,.12); color:var(--red); }
+  .tag-os { background:rgba(91,157,255,.12); color:var(--blue); }
+  .tag-un { background:rgba(90,82,70,.3); color:var(--ink-faint); }
+  .card-note { font-size:11px; color:var(--ink-faint); margin-top:9px; line-height:1.4; border-top:1px solid var(--line); padding-top:9px; }
+
+  .bottleneck { display:flex; flex-direction:column; gap:10px; }
+  .bn { background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:18px 22px; display:flex; align-items:flex-start; gap:18px; }
+  .bn-depth { font-family:var(--display); font-weight:900; font-size:1.4rem; min-width:60px; }
+  .bn.d1 .bn-depth{color:var(--red);} .bn.d2 .bn-depth{color:var(--amber);} .bn.d3 .bn-depth{color:var(--amber-dim);}
+  .bn-body h3 { font-family:var(--display); font-size:1.05rem; font-weight:800; margin-bottom:4px; }
+  .bn-body p { font-size:13px; color:var(--ink-dim); }
+  .bn-body p b { color:var(--ink); }
+  .bn-deep { margin-left:auto; font-family:var(--mono); font-size:9px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.1em; white-space:nowrap; }
+
+  .signal { margin-top:18px; background:var(--panel-2); border:1px dashed var(--line); border-radius:4px; padding:16px 20px; }
+  .signal h4 { font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--ink-dim); text-transform:uppercase; margin-bottom:10px; }
+  .signal ul { list-style:none; }
+  .signal li { font-size:13px; color:var(--ink-dim); padding:5px 0 5px 22px; position:relative; }
+  .signal li::before { position:absolute; left:0; top:5px; font-family:var(--mono); }
+  .signal li.good::before{content:"✓"; color:var(--green);} .signal li.warn::before{content:"⚠"; color:var(--amber);} .signal li.bad::before{content:"✕"; color:var(--red);} .signal li.star::before{content:"★"; color:var(--amber);}
+  .signal li b { color:var(--ink); }
+
+  .cross { background:linear-gradient(135deg,rgba(255,184,56,0.08),rgba(46,230,160,0.05)); border:1px solid var(--amber-dim); border-radius:4px; padding:24px; margin:28px 0; }
+  .cross h3 { font-family:var(--display); font-size:1.2rem; font-weight:900; text-transform:uppercase; color:var(--amber); margin-bottom:12px; }
+  .cross p { font-size:13.5px; color:var(--ink-dim); margin-bottom:8px; }
+  .cross p b { color:var(--ink); }
+  .cross-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:14px; }
+  .cross-cell { background:var(--panel); border:1px solid var(--line); border-radius:3px; padding:10px; text-align:center; }
+  .cross-cell .k { font-family:var(--mono); font-size:9px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; }
+  .cross-cell .v { font-size:12px; color:var(--green); font-weight:700; margin-top:4px; }
+
+  .section-rule { font-family:var(--mono); font-size:11px; letter-spacing:.3em; color:var(--ink-faint); text-transform:uppercase; margin:34px 0 20px; display:flex; align-items:center; gap:14px; }
+  .section-rule::after { content:""; flex:1; height:1px; background:var(--line); }
+
+  footer { border-top:1px solid var(--line); margin-top:38px; padding:26px 0 50px; font-family:var(--mono); font-size:11px; color:var(--ink-faint); line-height:1.8; }
+  footer b { color:var(--ink-dim); }
+
+  @media (max-width:900px){ .grid-3{grid-template-columns:repeat(2,1fr);} .verdict{grid-template-columns:1fr;} .gauge-cell{border-right:none; border-bottom:1px solid var(--line);} .cross-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .grid-3{grid-template-columns:1fr;} .bn{flex-wrap:wrap; gap:10px;} .bn-deep{margin-left:0;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker"><span class="dot"></span>具身智能产业链研究 · PHYSICAL AI</div>
+    <h1>物理AI<span class="hl">产业链</span></h1>
+    <p class="sub">人形机器人产业链研究。<b>定性是"观察期",不是布局期</b>——整机商业化在 2027-2030。面板按"卖铲子/找瓶颈"框架,梳理全产业链龙头与可投通道,标出当前资金效率最高的切入点。</p>
+    <div class="updated">// 更新: 2026/05/30 · 研究参考,非投资建议</div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="thermo">🌡️ 温度</button>
+    <button class="tab" data-tab="bottleneck">⛓️ 瓶颈</button>
+    <button class="tab" data-tab="stocks">📍 产业链</button>
+    <button class="tab" data-tab="funnel">🔻 漏斗</button>
+    <button class="tab" data-tab="cross">⭐ 交叉点</button>
+  </div>
+
+  <!-- TAB 1: 温度计 -->
+  <div class="panel-view active" id="thermo">
+    <div class="verdict">
+      <div class="gauge-cell">
+        <div class="thermometer">
+          <div class="thermo-tube"><div class="thermo-fill" id="fill"></div></div>
+          <div class="thermo-bulb"></div>
+        </div>
+        <div class="verdict-status">观察期<small>WATCHING</small></div>
+      </div>
+      <div class="verdict-body">
+        <h2>主题判读 · 2026年5月</h2>
+        <p>有真实进展(特斯拉转产 Optimus),但<b>目标 ≠ 已兑现收入</b>。整机商业化 2027-2030,美股能直接买的瓶颈标的极少。</p>
+        <p style="color:var(--ink-faint); font-size:13px;">用资金效率三问:①商业化时间——整机太远 ②锁仓期长 ③机会成本高。结论:<b>整机维持观察</b>,资金效率最高的切入是稀土磁材——见"交叉点"页。</p>
+        <div class="scale">
+          <div>🔵 太早 不碰</div>
+          <div class="s-on">🟡 观察 监控</div>
+          <div>🟢 布局 可入</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="premise">
+      <h4>改变格局的前提 · 2026/01/28</h4>
+      <p>特斯拉宣布<b>停产 Model S/X</b>,Fremont 工厂改造生产 Optimus Gen3,目标年产 100 万台、单台 $20K,2026 capex 翻倍至 $200 亿。Giga Texas 在建年产能 1000 万台工厂。<b>这是真信号,但"目标产能"和"已兑现收入"之间通常差很远</b>——别把规划当现实。</p>
+    </div>
+
+    <div class="signal">
+      <h4>为什么是观察期而非布局期</h4>
+      <ul>
+        <li class="bad">整机商业化在 <b>2027-2030</b>,锁仓周期长</li>
+        <li class="good">最硬的瓶颈(减速器/丝杠/电机)龙头在<b>A股,港股通/A股账户可买</b>(科创板需对应权限)</li>
+        <li class="warn">软件/具身智能模型的"GPT时刻"未到,是真正的深层瓶颈</li>
+        <li class="star">资金效率最高的切入:稀土磁材(MP/USAR,美股)——见交叉点页</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TAB 2: 瓶颈 -->
+  <div class="panel-view" id="bottleneck">
+    <p class="sub" style="margin-bottom:20px;">用"卖铲子/找瓶颈"框架:瓶颈环节 = 定价权环节。从最深(最不可替代)到表层。</p>
+    <div class="bottleneck">
+      <div class="bn d1">
+        <div class="bn-depth">01</div>
+        <div class="bn-body">
+          <h3>稀土永磁 NdFeB <span style="color:var(--red); font-size:.8rem;">最深瓶颈</span></h3>
+          <p>每个关节电机都依赖 NdFeB 永磁体。<b>中国控制 69% 开采 + 90% 加工提炼</b>,出口许可变化已带来波动。整个产业链定价权最强的一环。</p>
+        </div>
+        <div class="bn-deep">不可替代</div>
+      </div>
+      <div class="bn d2">
+        <div class="bn-depth">02</div>
+        <div class="bn-body">
+          <h3>精密传动 减速器/丝杠</h3>
+          <p>行星滚柱丝杠瓶颈最尖锐(窄供应商、长交期、难替代);谐波减速器次之。<b>占执行器成本 30-50%</b>,是单台机器人最贵的机械部件。</p>
+        </div>
+        <div class="bn-deep">供应商集中</div>
+      </div>
+      <div class="bn d3">
+        <div class="bn-depth">03</div>
+        <div class="bn-body">
+          <h3>灵巧手 Dexterous Hand</h3>
+          <p><b>占 BOM 31%,最大的单一成本部件</b>。多指灵巧操作的可靠性与成本是量产前必须跨过的门槛之一。</p>
+        </div>
+        <div class="bn-deep">最贵单件</div>
+      </div>
+    </div>
+    <div class="signal">
+      <h4>瓶颈判读</h4>
+      <ul>
+        <li class="star">稀土磁材是<b>最深瓶颈 + 美股纯玩</b>的切入点</li>
+        <li class="good">减速器龙头:双环传动(A股可买);绿的谐波(科创板需权限);Harmonic Drive(日股)</li>
+        <li class="warn">灵巧手仍在降本曲线早期,无成熟美股纯玩</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TAB 3: 产业链 -->
+  <div class="panel-view" id="stocks">
+    <p class="sub" style="margin-bottom:6px;">人形机器人产业链全景(A股超80家布局,按价值量+卡位精选各环节代表)。颜色:<span style="color:var(--blue)">蓝=A股/港股通</span> / <span style="color:var(--green)">绿=美股</span> / <span style="color:var(--amber)">黄=日股/海外</span> / <span style="color:var(--ink-faint)">灰=未上市</span>。</p>
+    <p class="sub" style="margin-bottom:18px; font-size:12px; color:var(--ink-faint);">价值量(浙商证券测算):线性执行器/丝杠 ~19% · 电机 ~16% · 减速器较高 · 灵巧手BOM 31%<br><span style="color:var(--amber-dim)">⚠ 股票代码请以行情软件核对为准,本面板侧重环节定位而非精确代码</span></p>
+
+    <!-- 稀土磁材:独立突出,第一层 -->
+    <div class="cross" style="margin:0 0 26px;">
+      <h3 style="display:flex; align-items:center; gap:10px;">⭐ 稀土永磁 NdFeB <span style="font-size:.7rem; font-family:var(--mono); color:var(--red); border:1px solid var(--red); padding:2px 8px; border-radius:2px;">最深瓶颈</span></h3>
+      <p>整个产业链<b>定价权最强、最不可替代</b>的一环——每个关节电机都依赖它,中国控制69%开采+90%加工。也是本面板<b>资金效率最高的切入点</b>:不依赖机器人量产,EV/风电/国防已有需求,机器人是增量期权。</p>
+      <div class="grid grid-3" style="margin-top:14px;">
+        <div class="card investable"><div class="card-ticker">MP <span>▲</span></div><div class="card-name">美国稀土龙头</div><div class="card-val">MP Materials</div><div class="card-tag tag-inv">美股 · 已盈利</div><div class="card-note">成熟标的;mine-to-magnet一体化;EV/风电/国防需求</div></div>
+        <div class="card investable"><div class="card-ticker">USAR <span>▲</span></div><div class="card-name">美国稀土</div><div class="card-val">USA Rare Earth</div><div class="card-tag tag-inv">美股 · 爬坡期</div><div class="card-note">Q2交付NdFeB,政府支持;小盘故事股,波动大需严止损</div></div>
+        <div class="card oversea"><div class="card-ticker">300748 <span>◆</span></div><div class="card-name">国产磁材</div><div class="card-val">金力永磁</div><div class="card-tag tag-os">A股 · 钕铁硼龙头</div><div class="card-note">国产高性能钕铁硼永磁龙头;A股稀土磁材代表</div></div>
+      </div>
+    </div>
+
+    <div class="layer"><div class="layer-head"><span class="layer-num" style="background:var(--red)">丝杠</span><span class="layer-title" style="font-size:1.05rem">行星滚柱丝杠/丝杠</span><span class="layer-tag" style="color:var(--amber)">价值量~19%·最高</span></div>
+    <div class="layer-desc">// Optimus髋膝等大负载关节核心,单台用14个,技术壁垒高,国产替代痛点</div>
+    <div class="grid grid-3">
+      <div class="card oversea"><div class="card-ticker">五洲新春</div><div class="card-val">五洲新春</div><div class="card-tag tag-os">A股·规划98万套</div><div class="card-note">反向式行星滚柱丝杠,线控传动事业部</div></div>
+      <div class="card oversea"><div class="card-ticker">江苏雷利</div><div class="card-val">江苏雷利/鼎智</div><div class="card-tag tag-os">A股</div><div class="card-note">微型线性传动龙头,滑/滚珠/滚柱丝杠全覆盖</div></div>
+      <div class="card oversea"><div class="card-ticker">震裕科技</div><div class="card-val">震裕科技</div><div class="card-tag tag-os">A股·小批量订单</div><div class="card-note">行星滚柱丝杠半自动产线日产120套</div></div>
+      <div class="card oversea"><div class="card-ticker">贝斯特</div><div class="card-val">贝斯特</div><div class="card-tag tag-os">A股·送样中</div><div class="card-note">滚珠丝杠副/直线导轨,行星滚柱丝杠出样</div></div>
+      <div class="card oversea"><div class="card-ticker">北特科技</div><div class="card-val">北特科技</div><div class="card-tag tag-os">A股</div><div class="card-note">丝杠布局</div></div>
+      <div class="card oversea"><div class="card-ticker">恒立液压</div><div class="card-val">恒立液压</div><div class="card-tag tag-os">A股</div><div class="card-note">液压龙头延伸丝杠</div></div>
+    </div></div>
+
+    <div class="layer"><div class="layer-head"><span class="layer-num" style="background:var(--amber)">电机</span><span class="layer-title" style="font-size:1.05rem">电机/执行器</span><span class="layer-tag" style="color:var(--amber)">价值量~16%</span></div>
+    <div class="layer-desc">// 空心杯电机(灵巧手刚需,Optimus灵巧手用12个)+无框力矩电机+伺服</div>
+    <div class="grid grid-3">
+      <div class="card oversea"><div class="card-ticker">汇川技术</div><div class="card-val">汇川技术</div><div class="card-tag tag-os">A股·伺服龙头</div><div class="card-note">关节伺服领先,长三角制造</div></div>
+      <div class="card oversea"><div class="card-ticker">拓普集团</div><div class="card-val">拓普集团</div><div class="card-tag tag-os">A股·特斯拉链</div><div class="card-note">机器人电驱执行器+灵巧手,同步研发</div></div>
+      <div class="card oversea"><div class="card-ticker">兆威机电</div><div class="card-val">兆威机电</div><div class="card-tag tag-os">A股</div><div class="card-note">微型驱动/空心杯,灵巧手核心</div></div>
+      <div class="card oversea"><div class="card-ticker">鸣志电器</div><div class="card-val">鸣志电器</div><div class="card-tag tag-os">A股</div><div class="card-note">空心杯电机/步进电机</div></div>
+      <div class="card oversea"><div class="card-ticker">雷赛智能</div><div class="card-val">雷赛智能</div><div class="card-tag tag-os">A股</div><div class="card-note">运动控制+灵巧手研发</div></div>
+      <div class="card oversea"><div class="card-ticker">伟创电气</div><div class="card-val">伟创电气</div><div class="card-tag tag-os">科创板·需权限</div><div class="card-note">电机/驱动</div></div>
+    </div></div>
+
+    <div class="layer"><div class="layer-head"><span class="layer-num" style="background:var(--red)">减速器</span><span class="layer-title" style="font-size:1.05rem">减速器</span><span class="layer-tag" style="color:var(--amber)">占BOM 35%+</span></div>
+    <div class="layer-desc">// 谐波(手/小关节)+RV(大关节),国产已突破海外垄断</div>
+    <div class="grid grid-3">
+      <div class="card oversea"><div class="card-ticker">绿的谐波</div><div class="card-val">绿的谐波</div><div class="card-tag tag-os">科创板·特斯拉链</div><div class="card-note">谐波减速器绝对龙头(需科创板权限)</div></div>
+      <div class="card oversea"><div class="card-ticker">双环传动</div><div class="card-val">双环传动</div><div class="card-tag tag-os">A股</div><div class="card-note">RV减速器+齿轮</div></div>
+      <div class="card oversea"><div class="card-ticker">中大力德</div><div class="card-val">中大力德</div><div class="card-tag tag-os">A股·宇树链</div><div class="card-note">减速器+总成</div></div>
+      <div class="card oversea"><div class="card-ticker">恒工精密</div><div class="card-val">恒工精密</div><div class="card-tag tag-os">A股</div><div class="card-note">RV减速机核心部件行星架</div></div>
+      <div class="card oversea"><div class="card-ticker">精锻科技</div><div class="card-val">精锻科技</div><div class="card-tag tag-os">A股</div><div class="card-note">减速器精密锻造</div></div>
+      <div class="card partial"><div class="card-ticker">6324</div><div class="card-val">Harmonic Drive</div><div class="card-tag tag-par">日股·全球原垄断</div><div class="card-note">哈默纳科,谐波减速器原垄断者</div></div>
+    </div></div>
+
+    <div class="layer"><div class="layer-head"><span class="layer-num" style="background:var(--amber-dim)">轴承</span><span class="layer-title" style="font-size:1.05rem">轴承</span></div>
+    <div class="layer-desc">// 灵巧手用24滑动+24球+36滚针轴承,减速器内部"基石"</div>
+    <div class="grid grid-3">
+      <div class="card oversea"><div class="card-ticker">长盛轴承</div><div class="card-val">长盛轴承</div><div class="card-tag tag-os">A股·特斯拉链</div><div class="card-note">自润滑轴承,已用于特斯拉汽车</div></div>
+      <div class="card oversea"><div class="card-ticker">力星股份</div><div class="card-val">力星股份</div><div class="card-tag tag-os">A股·卖铲子</div><div class="card-note">轴承滚动体(钢球),谁家赢都要用</div></div>
+      <div class="card oversea"><div class="card-ticker">苏轴/国机精工</div><div class="card-val">苏轴/国机精工</div><div class="card-tag tag-os">A股</div><div class="card-note">滚针轴承,减速器内部基石</div></div>
+    </div></div>
+
+    <div class="layer"><div class="layer-head"><span class="layer-num" style="background:var(--amber-dim)">灵巧手</span><span class="layer-title" style="font-size:1.05rem">灵巧手/传感器</span><span class="layer-tag" style="color:var(--amber)">BOM 31%·最贵</span></div>
+    <div class="layer-desc">// 触觉/力控传感器+柔性电子皮肤+微型集成</div>
+    <div class="grid grid-3">
+      <div class="card oversea"><div class="card-ticker">汉威科技</div><div class="card-val">汉威科技</div><div class="card-tag tag-os">A股</div><div class="card-note">触觉传感+柔性电子皮肤,已小批量供货</div></div>
+      <div class="card oversea"><div class="card-ticker">柯力传感</div><div class="card-val">柯力传感</div><div class="card-tag tag-os">A股</div><div class="card-note">力传感器</div></div>
+      <div class="card oversea"><div class="card-ticker">芯动联科</div><div class="card-val">芯动联科</div><div class="card-tag tag-os">科创板·需权限</div><div class="card-note">MEMS惯性传感器</div></div>
+    </div></div>
+
+    <div class="layer"><div class="layer-head"><span class="layer-num" style="background:var(--ink-faint)">材料</span><span class="layer-title" style="font-size:1.05rem">轻量化材料</span></div>
+    <div class="layer-desc">// PEEK材料关节减重70%,2026单机用量大增(注:稀土磁材见顶部独立层)</div>
+    <div class="grid grid-3">
+      <div class="card oversea"><div class="card-ticker">沃特股份</div><div class="card-val">沃特股份</div><div class="card-tag tag-os">A股·PEEK</div><div class="card-note">PEEK材料进入试生产,关节减重</div></div>
+      <div class="card oversea"><div class="card-ticker">中研股份</div><div class="card-val">中研/新瀚新材</div><div class="card-tag tag-os">A股</div><div class="card-note">PEEK材料其他布局</div></div>
+      <div class="card oversea"><div class="card-ticker">碳纤维</div><div class="card-val">光威/中复神鹰</div><div class="card-tag tag-os">A股</div><div class="card-note">碳纤维轻量化</div></div>
+    </div></div>
+
+    <div class="layer"><div class="layer-head"><span class="layer-num" style="background:var(--ink-faint)">整机</span><span class="layer-title" style="font-size:1.05rem">本体整机</span></div>
+    <div class="layer-desc">// 总成商+国产本体,商业化先行,2026 IPO潮</div>
+    <div class="grid grid-3">
+      <div class="card oversea"><div class="card-ticker">三花智控</div><div class="card-val">三花智控</div><div class="card-tag tag-os">A股·总成</div><div class="card-note">机器人部件总成,特斯拉链</div></div>
+      <div class="card unlisted"><div class="card-ticker">宇树</div><div class="card-val">宇树科技</div><div class="card-tag tag-un">未上市·辅导中</div><div class="card-note">四足全球70%,全栈自研,关注IPO</div></div>
+      <div class="card unlisted"><div class="card-ticker">智元</div><div class="card-val">智元机器人</div><div class="card-tag tag-un">未上市·股改</div><div class="card-note">千台级下线,关注IPO</div></div>
+    </div></div>
+
+    <div class="signal">
+      <h4>产业链判读</h4>
+      <ul>
+        <li class="star">稀土永磁是<b>最深瓶颈 + 资金效率最高</b>的切入点(见顶部独立层),美股MP/USAR + A股金力永磁</li>
+        <li class="good">A股几乎覆盖物理AI<b>全部硬件环节</b>(丝杠/电机/减速器/轴承/灵巧手/材料),这是A股投资者的核心阵地</li>
+        <li class="star">价值量最高的硬件环节是<b>线性执行器/丝杠(~19%)</b>,技术壁垒高、国产替代空间大</li>
+        <li class="warn">"卖铲子"逻辑:力星(钢球)、轴承、丝杠这类<b>不管谁家整机赢都要用</b>的环节,确定性高于赌单一整机</li>
+        <li class="warn">A股机器人板块2025已大幅炒作(一季+51%、二季-20%),<b>多数位置不低,需等回调精选</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TAB: 筛选漏斗 -->
+  <div class="panel-view" id="funnel">
+    <p class="sub" style="margin-bottom:14px;">一套 6 道闸的筛选框架。物理AI整体在观察期,<b>大多数标的会被前几道闸拦下</b>。漏斗的作用是:解释为什么现在多数标的不到买点,以及该如何精选。</p>
+
+    <div class="bottleneck" style="gap:10px;">
+      <div class="bn" style="border-left:3px solid var(--red);"><div class="bn-depth" style="color:var(--red); font-size:1.1rem; min-width:42px;">1</div><div class="bn-body"><h3 style="font-size:.95rem;">温度计 · 观察期🟡</h3><p>物理AI主题处于观察期而非加速期。<b>这道闸本身就给整个主题降权</b>——不是不能碰,是默认仓位要更小、更挑。</p></div><div class="bn-deep">降权</div></div>
+      <div class="bn" style="border-left:3px solid var(--red);"><div class="bn-depth" style="color:var(--red); font-size:1.1rem; min-width:42px;">2</div><div class="bn-body"><h3 style="font-size:.95rem;">资金效率三问 · 多数不过</h3><p>整机/灵巧手商业化2027-2030,<b>锁仓太久</b>→不过。只有稀土"收入已兑现"能过这道闸。</p></div><div class="bn-deep">关键闸</div></div>
+      <div class="bn" style="border-left:3px solid var(--amber);"><div class="bn-depth" style="color:var(--amber); font-size:1.1rem; min-width:42px;">3</div><div class="bn-body"><h3 style="font-size:.95rem;">卖铲子 · 优先瓶颈层</h3><p>稀土(最深瓶颈)>减速器/电机>整机。优先上游,避开整机的技术路线风险。</p></div><div class="bn-deep">排序</div></div>
+      <div class="bn" style="border-left:3px solid var(--amber);"><div class="bn-depth" style="color:var(--amber); font-size:1.1rem; min-width:42px;">4</div><div class="bn-body"><h3 style="font-size:.95rem;">四阶段 · 看位置</h3><p>A股传动板块2025已炒过(一季涨51%、二季回调20%),稀土也炒过一波。<b>多在第三阶段,需等回调</b>。</p></div><div class="bn-deep">砍最狠</div></div>
+      <div class="bn" style="border-left:3px solid var(--amber-dim);"><div class="bn-depth" style="color:var(--amber-dim); font-size:1.1rem; min-width:42px;">5</div><div class="bn-body"><h3 style="font-size:.95rem;">流动性与摩擦</h3><p>跨市场有汇率/信息差成本;部分标的是小盘故事股,流动性和波动需留意。</p></div><div class="bn-deep">摩擦</div></div>
+      <div class="bn" style="border-left:3px solid var(--red);"><div class="bn-depth" style="color:var(--red); font-size:1.1rem; min-width:42px;">6</div><div class="bn-body"><h3 style="font-size:.95rem;">能力圈 · 新主题谨慎</h3><p>物理AI是相对新的主题,技术路线仍在收敛。新主题宜小仓位试错,不宜重仓押注。</p></div><div class="bn-deep">谨慎</div></div>
+    </div>
+
+    <div class="signal">
+      <h4>跑完漏斗的结果(2026/05/30)</h4>
+      <ul>
+        <li class="bad">整机(TSLA/宇树/智元):资金效率闸不过 → 观察,关注量产兑现</li>
+        <li class="warn">减速器/电机(A股):可买,但板块2025已炒过、位置偏高 → 等回调</li>
+        <li class="star">稀土(MP/USAR):唯一过"资金效率"闸 → 资金效率最高,但需查是否过热</li>
+        <li class="warn">结论:当前<b>无明确建仓点,稀土最值得深研</b>,其余观察</li>
+      </ul>
+    </div>
+
+    <div class="signal" style="border-color:var(--amber-dim);">
+      <h4>漏斗的核心原则</h4>
+      <ul>
+        <li class="warn">防止因为"主题很火 + 通道能买"就冲动入场</li>
+        <li class="good">能买 ≠ 该买:通道宽不等于标准松</li>
+        <li class="star">把一个热门大主题,诚实收敛成"精选少数,其余观察"</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TAB 4: 交叉点 -->
+  <div class="panel-view" id="cross">
+    <div class="cross">
+      <h3>⭐ 唯一现在就成立的交叉点:稀土磁材</h3>
+      <p>这次全景研究最有价值的发现:物理AI整机要等2030,但<b>稀土磁材现在就成立</b>——因为它<b>不依赖机器人量产</b>就有需求(EV电机、风电、国防),机器人只是额外的上行期权。</p>
+      <p>这把"等2030的远期故事",变成了"<b>现在就有收入 + 机器人是免费看涨期权</b>"的近期标的。资金效率远高于赌整机。</p>
+      <div class="cross-grid">
+        <div class="cross-cell"><div class="k">真瓶颈</div><div class="v">✓ 90%加工在中国</div></div>
+        <div class="cross-cell"><div class="k">美股可投</div><div class="v">✓ MP/USAR</div></div>
+        <div class="cross-cell"><div class="k">商业化</div><div class="v">✓ 已兑现</div></div>
+        <div class="cross-cell"><div class="k">政策催化</div><div class="v">✓ 去中国化</div></div>
+      </div>
+    </div>
+
+    <div class="signal">
+      <h4>资金效率三问 · 稀土磁材 vs 整机</h4>
+      <ul>
+        <li class="good">商业化时间:整机2027-2030 ✕ &nbsp;|&nbsp; 稀土<b>已兑现</b>(现有EV/风电/国防需求)✓</li>
+        <li class="good">锁仓期:整机长 ✕ &nbsp;|&nbsp; 稀土短(有现有市场支撑)✓</li>
+        <li class="good">机会成本:稀土跨界受益,不押单一主题成败</li>
+      </ul>
+    </div>
+
+    <div class="signal" style="border-color:var(--amber-dim);">
+      <h4>⚠️ 入场前必查(别急)</h4>
+      <ul>
+        <li class="warn">稀土板块2025已因"去中国化"炒过一波,<b>查当前位置是否过热</b></li>
+        <li class="warn">MP vs USAR:MP已盈利成熟、USAR是产能爬坡期故事股,风险档位不同</li>
+        <li class="bad">USAR是小盘+爬坡期,属故事股范畴,需更严止损</li>
+        <li class="star">下一步:深挖 MP vs USAR 当前位置/估值/风险档位</li>
+      </ul>
+    </div>
+
+    <div class="section-rule">为什么稀土值得单独关注</div>
+    <p class="sub">稀土磁材是<b>多主题共同上游</b>:既是AI数据中心/国防的上游材料,又是物理AI的最深瓶颈。<b>这正说明它的强韧</b>——一个标的同时受益 AI + 物理AI + 国防 + EV/风电多条线,不依赖单一主题成败。</p>
+  </div>
+
+  <footer>
+    <b>物理AI 决策面板 v1.0</b> · 数据更新至 2026/05/30<br>
+    定性:观察期(WATCHING)。整机商业化远,当前精选少数、其余观察。<br>
+    资金效率最高的切入是稀土磁材(MP/USAR),需进一步研究是否过热。<br>
+    研究参考,非投资建议。物理AI主题波动性极高,注意:不追高、设好止损、新主题小仓位试。
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+      document.querySelectorAll('.panel-view').forEach(function(x){x.classList.remove('active');});
+      t.classList.add('active');
+      document.getElementById(t.dataset.tab).classList.add('active');
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+  window.addEventListener('load', function(){
+    setTimeout(function(){ document.getElementById('fill').style.height='42%'; }, 300);
+  });
+</script>
+</body>
+</html>
